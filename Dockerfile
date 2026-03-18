@@ -2,6 +2,11 @@
 FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /app
 COPY . .
+
+# Give execute permission to gradlew
+RUN chmod +x ./gradlew
+
+# Build the JAR
 RUN ./gradlew clean build -x checkstyleMain -x checkstyleTest
 
 # Stage 2: Runtime
