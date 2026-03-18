@@ -1,11 +1,11 @@
-# Use a lightweight Java 21 runtime
-FROM eclipse-temurin:21-jdk-jammy
-
-# Set working directory
+# Stage 1: Build
+FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /app
+COPY . .
+RUN ./gradlew clean build -x checkstyleMain -x checkstyleTest
 
-# Copy jar into container
-COPY build/libs/*.jar app.jar
-
-# Run the application
+# Stage 2: Runtime
+FROM eclipse-temurin:21-jdk-jammy
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
