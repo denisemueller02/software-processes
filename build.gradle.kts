@@ -5,6 +5,11 @@ plugins {
 	checkstyle
 }
 
+checkstyle {
+	toolVersion = "10.12.4"
+	configFile = file("config/checkstyle/checkstyle.xml")
+}
+
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 description = "Software Processes Project; Manuel, Büsra, Denise"
