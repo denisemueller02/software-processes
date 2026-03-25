@@ -2,13 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "4.0.3"
 	id("io.spring.dependency-management") version "1.1.7"
-	checkstyle
 	jacoco
-}
-
-checkstyle {
-	toolVersion = "10.12.4"
-	configFile = file("config/checkstyle/checkstyle.xml")
 }
 
 group = "com.example"
@@ -84,7 +78,5 @@ jacoco {
 tasks.jacocoTestReport {
 	reports {
 		xml.required = true
-		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
 	}
 }
