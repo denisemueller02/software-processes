@@ -3,6 +3,7 @@ plugins {
 	id("org.springframework.boot") version "4.0.3"
 	id("io.spring.dependency-management") version "1.1.7"
 	checkstyle
+	jacoco
 }
 
 checkstyle {
@@ -63,5 +64,27 @@ tasks.register("projectInfo") {
 tasks.register("printVersion") {
 	doLast {
 		println("Project version: ${project.version}")
+	}
+}
+
+// JaCoCo
+tasks.test {
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+}
+
+jacoco {
+	toolVersion = "0.8.14"
+	reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
+}
+
+tasks.jacocoTestReport {
+	reports {
+		xml.required = true
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
 	}
 }
