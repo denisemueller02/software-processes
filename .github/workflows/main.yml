@@ -41,7 +41,7 @@ jobs:
           docker run --rm \
             -e SONAR_HOST_URL="http://10.0.40.169:9000" \
             -e SONAR_TOKEN="${{ secrets.SONAR_TOKEN }}" \
-            -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=team1 -Dsonar.sources=src/main -Dsonar.java.libraries=build/libs -Dsonar.java.binaries=build/classes -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml -Dsonar.junit.reportsPath=build/test-results" \
+            -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=team1 -Dsonar.sources=src/main -Dsonar.java.libraries=build/libs -Dsonar.java.binaries=build/classes -Dsonar.coverage.jacoco.xmlReportPaths=build/customJacocoReportDir/test/jacocoTestReport.xml -Dsonar.junit.reportsPath=build/test-results" \
             -v "${PWD}:/usr/src" \
             sonarsource/sonar-scanner-cli
 
