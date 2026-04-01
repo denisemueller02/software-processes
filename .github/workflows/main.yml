@@ -32,7 +32,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/home/gradle/project -w /home/gradle/project gradle:9.4.1-jdk21 gradle build -x checkstyleMain -x checkstyleTest --no-daemon
+          docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/home/gradle/project -w /home/gradle/project gradle:9.4.1-jdk21 gradle -g "/tmp" build --no-daemon
           docker tag team1-app 10.0.40.169:5000/team1/team1-app
           docker push 10.0.40.169:5000/team1/team1-app
 
