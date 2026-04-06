@@ -81,20 +81,3 @@ tasks.jacocoTestReport {
 		html.required = true
 	}
 }
-
-//Generate PDF from Markdown and make the task a no-op if pandoc isn't found locally
-tasks.register("generatePdf") {
-    group = "documentation"
-    description = "Converts README.md to PDF (runs via Docker in CI)"
-    doLast {
-        val pandocAvailable = try {
-            Runtime.getRuntime().exec(arrayOf("pandoc", "--version")).waitFor() == 0
-        } catch (e: Exception) { false }
-
-        if (pandocAvailable) {
-            exec { commandLine("pandoc", "README.md", "-o", "readme.pdf") }
-        } else {
-            println("ℹ️  pandoc not found locally — skipping. PDF is generated in CI.")
-        }
-    }
-}
