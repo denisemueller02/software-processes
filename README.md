@@ -15,6 +15,10 @@ Start directly via Main (run java at top)
 
 The PDF is generated when the Workflows are executed. You can manually generate it by executing the Docker command from the workflow (Step generate PDF from README) in your project root. Make sure Docker is running!
 
+```
+docker run --rm -v "%cd%":/data pandoc/latex:latest /data/README.md -o /data/readme.pdf
+```
+
 ## Workflows
 
 There are 3 Workflows: development, main and release. These three are almost identical, with the only difference being, that the main branch also generates a jacoco report and sends it to our SonarQube instance.
